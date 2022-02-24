@@ -15,11 +15,11 @@
     </div>
 
     <% other_explorers = other_explorers() %>
-    <% col_size = if Enum.empty?(other_explorers), do: 3, else: 2 %>
+    <% col_size = if Enum.empty?(other_explorers), do: 3, else: 4 %>
 
     <div class="row">
-      <div class="col-xs-12 col-lg-3">
-        <p class="footer-info-text"><%= gettext("Blockscout is a tool for inspecting and analyzing EVM based blockchains. Blockchain explorer for Ethereum Networks.") %></p>
+      <div class="col-xs-12 col-lg-4">
+        <p class="footer-info-text"><%= gettext("BTX is a tool for inspecting and analyzing EVM based blockchains. Blockchain explorer for Ethereum Networks.") %></p>
         <div class="footer-social-icons">
           <a href="https://github.com/blockscout/blockscout" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Github") %>'>
             <div class="footer-social-icon-container fontawesome-icon github"></div>
@@ -34,12 +34,15 @@
       </div>
 
       <div class="col-xs-12 col-md-4 col-lg-<%= col_size %> footer-list">
-        <h3>BlockScout</h3>
+        <h3>BTX</h3>
         <ul>
           <li><a href="<%= issue_link(@conn) %>" rel="noreferrer" class="footer-link" target="_blank"><%= gettext("Submit an Issue") %></a></li>
           <li><a href="https://github.com/blockscout/blockscout" rel="noreferrer" class="footer-link"><%= gettext("Contribute") %></a></li>
           <li><a href="https://gitter.im/poanetwork/blockscout" rel="noreferrer" class="footer-link"><%= gettext("Chat") %></a></li>
           <li><a href="https://forum.poa.network/c/blockscout" rel="noreferrer" class="footer-link"><%= gettext("Support") %></a></li>
+            <%= if System.get_env("COIN_NAME") && System.get_env("NETWORK_PATH") && System.get_env("SUBNETWORK") && System.get_env("JSON_RPC") && System.get_env("CHAIN_ID") do %>
+            <li><a class="footer-link js-btn-add-chain-to-mm btn-add-chain-to-mm in-footer" onclick="add()" style="cursor: pointer;"><%= gettext("Add") <> " #{System.get_env("SUBNETWORK")}" %></a></li>
+          <% end %>
         </ul>
       </div>
       <% main_nets = main_nets(other_networks()) %>
@@ -89,4 +92,30 @@
       </div>
     <% end %>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1-rc.0/web3.min.js" integrity="sha512-Ui9NE+/XdhwxssTrWetwWgpwpZJCLgTpB2dgkq+xe3O7lmZEJe+2rw3OT3YbYIUCQWH5dOO8ObLOYmbUVpPBgw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+  function add(){
+    try{
+      window.ethereum.request({
+method: 'wallet_addEthereumChain',
+params: [{
+chainId: '0x836',
+chainName: 'BitFlash Smart Chain',
+nativeCurrency: {
+    name: 'BTX Coin',
+    symbol: 'BTX',
+    decimals: 18
+},
+rpcUrls: ['https://64.227.190.26/rpc/'],
+blockExplorerUrls: ['https://btxscan.com']
+}]
+})
+.catch((error) => {
+console.log(error)
+})
+    }catch(e){
+      console.log("Some Error occured!");
+    }
+  }
+  </script>
 </footer>

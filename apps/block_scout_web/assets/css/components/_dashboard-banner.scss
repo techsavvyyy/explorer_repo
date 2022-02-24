@@ -224,7 +224,7 @@ $dashboard-banner-chart-axis-font-color-alt: #333;
 
 .dashboard-banner-network-stats {
   column-gap: 25px;
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 
   @include media-breakpoint-down(lg) {

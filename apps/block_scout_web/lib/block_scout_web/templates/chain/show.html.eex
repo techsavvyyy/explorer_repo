@@ -115,16 +115,33 @@
       <div class="dashboard-banner-network-plain-container">
         <%# <div class="dashboard-banner-network-stats"> %>
         <div class="w-100">
-  <%= render BlockScoutWeb.LayoutView, "_search.html", conn: @conn, id: "main-search-autocomplete", additional_classes: ["mobile-search-hide"] %>
-
+          <%= render BlockScoutWeb.LayoutView, "_search.html", conn: @conn, id: "main-search-autocomplete", additional_classes: ["mobile-search-hide"] %>
         </div>
       </div>
     </div>
   </div>
 </div>
   <div class="card-chain-blocks d-flex justify-content-center js-ad-dependant-mb-3">
-    <div class="dashboard-banner-network-plain-container  m-5 rounded-lg" style="box-shadow: 21px 16px 14px 9px #91889b;" >
-        <div class="dashboard-banner-network-stats">
+    <div class="m-auto rounded-lg" style="box-shadow: 11px 9px 24px 0px #91889b;-webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+    background-color: #8258cd;
+    border-top-left-radius: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 205px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    margin: 45px 0 -15px 30px;
+    max-width: 100%;
+    padding: 30px 0 30px 60px;
+    width: 750px;
+    position: relative;" >
+        <div class="dashboard-banner-network-stats row">
           <%= case @average_block_time do %>
             <% {:error, :disabled} -> %>
               <%= nil %>
